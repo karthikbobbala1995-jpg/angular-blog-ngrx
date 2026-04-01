@@ -1,5 +1,9 @@
 <div class="container">
-  <h1 class="title">NgRx Task List</h1>
+  <h1 class="title">
+    <span>
+        <fa-icon [icon]="faPen"></fa-icon>
+    </span>
+    NgRx Task List</h1>
 
   <!-- Add Task -->
   <div class="task-input">
@@ -9,7 +13,9 @@
       [(ngModel)]="newTaskDescription"
       (keyup.enter)="addTask()"
     />
-    <button (click)="addTask()">Add</button>
+    <button (click)="addTask()">
+        <fa-icon [icon]="faAdd"></fa-icon>
+    </button>
   </div>
 
   <!-- Task Summary -->
@@ -34,7 +40,7 @@
       </label>
 
       <button class="delete-btn" (click)="removeTask(task.id)">
-        Delete
+<fa-icon [icon]="faDelete"></fa-icon>
       </button>
     </li>
 }

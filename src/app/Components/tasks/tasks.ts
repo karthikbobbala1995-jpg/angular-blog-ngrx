@@ -6,14 +6,18 @@ import { selectAllTasks, selectIncompleteTaskCount } from '../../Task_Store/task
 import { addTask, removeTask, toggleTask } from '../../Task_Store/task.action';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faDeleteLeft, faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-tasks',
-  imports: [CommonModule,AsyncPipe,FormsModule],
+  imports: [CommonModule,AsyncPipe,FormsModule,FontAwesomeModule],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css',
 })
 export class Tasks implements OnInit {
+  faPen = faPen;
+  faDelete = faTrash;
+  faAdd =  faPlus;
 
   newTaskDescription = '';
   allTasks$ : Observable<Task[]>;
@@ -38,7 +42,9 @@ export class Tasks implements OnInit {
     this.newTaskDescription = ''
   }
   removeTask(taskId:string) {
-    this.store.dispatch(removeTask({taskId}))
+    if (window.confirm('Are you sure you want to delete this task?')) {
+    this.store.dispatch(removeTask({ taskId }));
+  }
   }
   toggleCompletion(taskId:string) {
     this.store.dispatch(toggleTask({taskId}))
