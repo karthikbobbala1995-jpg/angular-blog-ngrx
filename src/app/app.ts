@@ -1,12 +1,30 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { decrement, increment } from '../couter.action';
+import { Tasks } from './Components/tasks/tasks';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,AsyncPipe,Tasks],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
   protected readonly title = signal('angular_ngrx');
+
+  count$:Observable<number>;
+    constructor(private store: Store<{ count: number }>) {
+    this.count$ = this.store.select('count');
+  }
+
+   inc() {
+    this.store.dispatch(increment());
+  }
+
+  dec() {
+    this.store.dispatch(decrement());
+  }
 }

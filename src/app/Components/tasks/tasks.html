@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="title">NgRx Task List</h1>
+
+  <!-- Add Task -->
+  <div class="task-input">
+    <input
+      type="text"
+      placeholder="Enter a task..."
+      [(ngModel)]="newTaskDescription"
+      (keyup.enter)="addTask()"
+    />
+    <button (click)="addTask()">Add</button>
+  </div>
+
+  <!-- Task Summary -->
+  <p class="summary">
+    Incomplete Tasks: {{ incompleteTasks$ | async }}
+  </p>
+
+  <!-- Task List -->
+  <ul class="task-list">
+    @for (task of (allTasks$ | async); track $index) {
+    <li  class="task-item">
+      
+      <label>
+        <input
+          type="checkbox"
+          [checked]="task.completed"
+          (change)="toggleCompletion(task.id)"
+        />
+        <span [class.completed]="task.completed">
+          {{ task.description }}
+        </span>
+      </label>
+
+      <button class="delete-btn" (click)="removeTask(task.id)">
+        Delete
+      </button>
+    </li>
+}
+  </ul>
+</div>
