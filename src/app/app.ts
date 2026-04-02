@@ -5,10 +5,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { decrement, increment } from '../couter.action';
 import { Tasks } from './Components/tasks/tasks';
+import { Blogs } from "./Components/blogs/blogs";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,AsyncPipe,Tasks],
+  imports: [RouterOutlet, AsyncPipe, Tasks, Blogs],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

@@ -1,0 +1,66 @@
+<div class="container">
+
+  <!-- LEFT: FORM -->
+  <div class="form-section">
+    <h2>Add Blog</h2>
+
+    <form [formGroup]="blogForm"  (ngSubmit)="handleSubmit($event)">
+      
+      <input 
+        type="text" 
+        placeholder="Title"
+        name="title"
+        formControlName="title"
+        required
+      />
+
+      <textarea 
+        placeholder="Description"
+        name="description"
+        formControlName="description"
+        required
+      ></textarea>
+
+      <input 
+        type="text" 
+        placeholder="Author"
+        name="author"
+        formControlName="author"
+        required
+      />
+
+      <button type="submit">{{buttonText}}</button>
+    </form>
+  </div>
+
+  <!-- RIGHT: BLOG LIST -->
+  <div class="list-section">
+    <h2>All Blogs</h2>
+
+    <!-- <div *ngIf="blogs.length === 0" class="empty">
+      No blogs yet. Add one!
+    </div> -->
+
+    <div class="blog-card">
+    @for (blog of blogs$ | async; track $index) {
+  <h3>{{ blog.title }}</h3>
+  <div class="blog_menu">
+<p>{{ blog.description }}</p>
+  </div>
+  <div class="delete_button">
+  <div class="edit" (click)="handleEdit(blog)">
+        <fa-icon [icon]="faPen"></fa-icon>
+  </div>
+  <div class="delete" (click)="handleDelete(blog)">
+<fa-icon [icon]="faDelete"></fa-icon>
+  </div>
+     
+ </div>
+      
+      <span>— {{ blog.author }}</span>
+    }
+    
+    </div>
+  </div>
+
+</div>

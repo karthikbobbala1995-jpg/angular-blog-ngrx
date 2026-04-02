@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { countReducer } from '../counter.reducer';
 import { taskReducer } from './Task_Store/task.reducer';
+import { blogsReducer } from './Blogs_Store/blogs.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,7 +14,8 @@ export const appConfig: ApplicationConfig = {
     provideStore(
       {
         count:countReducer,
-        tasks:taskReducer
+        tasks:taskReducer,
+        blogs:blogsReducer
       }
     )
 ]
